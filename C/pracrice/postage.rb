@@ -29,23 +29,16 @@ def postage_checker(length, width, height, ls, ms)
   l1, l2, l3, l4, l5 = ls
   m1, m2, m3, m4, m5, m6 = ms
 
-  if height <= l1
-    if [length, width].max <= l2
-      m1
-    elsif length + width <= l3
-      m2
-    else
-      m3
-    end
-  else
-    if [length, width, height].max <= l4
-      m4
-    elsif [length, width, height].sum <= l5
-      m5
-    else
-      length * width * height * m6
-    end
-  end
+  # 高さが基準以下
+  return m1 if [length, width].max <= l2 && height <= l1
+  return m2 if length + width <= l3 && height <= l1
+  return m3 if height <= l1
+
+  # 高さが基準を超える場合
+  return m4 if [length, width, height].max <= l4
+  return m5 if length + width + height <= l5
+
+  length * width * height * m6
 end
 
 length, width, height = gets.split.map(&:to_i)
