@@ -6,12 +6,5 @@
 
 n = gets.chomp.to_i
 numbers = n.times.map { gets.chomp.split.map(&:to_i) }
-num = []
-numbers.each do |a, b|
-  if a.eql?(b)
-    num << a * b
-  else
-    num << a + b
-  end
-end
-puts num.sum
+total = numbers.sum { |a, b| a == b ? a * b : a + b }
+puts total
